@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#090d0b" />
+  <title>HERACLES 力量训练计算器</title>
+  <meta name="description" content="e1RM估算、训练配重、训练目标选择与杠铃配片的一体化力量训练工具。" />
+  <style>:root{--bg:#090d0b;--panel:#111714;--panel2:#161d19;--line:#28322c;--text:#f6f8f6;--muted:#8e9b93;--green:#b8f83d;--green2:#77d92c;--warn:#ffc95c;--radius:22px}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 85% 5%,#1b2a19 0,transparent 28%),var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",sans-serif}.shell{width:min(100%,720px);margin:auto;padding:calc(18px + env(safe-area-inset-top)) 18px calc(32px + env(safe-area-inset-bottom))}.topbar{display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:13px;letter-spacing:1.3px}.mark{display:grid;place-items:center;width:30px;height:30px;background:var(--green);color:#10150f;border-radius:9px;font-size:17px}.unit-switch{display:flex;padding:3px;background:#151b18;border:1px solid var(--line);border-radius:10px}.unit{border:0;color:var(--muted);background:transparent;padding:7px 11px;border-radius:7px;font-size:11px;font-weight:800;cursor:pointer}.unit.active{background:var(--green);color:#10150f}.hero{padding:28px 3px 18px}.eyebrow,.section-title p{margin:0 0 7px;color:var(--green);font-size:10px;font-weight:800;letter-spacing:2px}.hero h1{margin:0;font-size:clamp(38px,10vw,64px);line-height:.98;letter-spacing:-3px}.hero h1 span{color:var(--green)}.hero>p:last-child{max-width:430px;margin:10px 0 0;color:var(--muted);font-size:13px;line-height:1.55}.card{background:linear-gradient(145deg,rgba(25,34,29,.98),rgba(14,19,16,.98));border:1px solid var(--line);border-radius:var(--radius);box-shadow:0 18px 50px rgba(0,0,0,.2)}.calculator{padding:18px}.inputs{display:grid;grid-template-columns:1fr 1fr;gap:13px}.inputs label,.field-label{font-size:13px;font-weight:700}.inputs label>span{float:right;color:var(--muted);font-size:10px;letter-spacing:1px}.select-field{width:100%;margin:9px 0 15px;padding:13px 14px;border:1px solid var(--line);border-radius:13px;background:#0d120f;color:var(--text);font-size:15px}.number-field{display:grid;grid-template-columns:44px 1fr 44px;margin-top:10px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#0d120f}.number-field button{border:0;background:transparent;color:var(--green);font-size:22px;cursor:pointer}.number-field button:active{background:#1d2921}.number-field input{width:100%;min-width:0;padding:14px 3px;border:0;border-left:1px solid var(--line);border-right:1px solid var(--line);outline:0;text-align:center;background:transparent;color:var(--text);font-size:25px;font-weight:850;-moz-appearance:textfield}.number-field input::-webkit-inner-spin-button{display:none}.rep-note{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);color:var(--muted);font-size:12px}.result{margin-top:14px;padding:22px;background:linear-gradient(150deg,#172517,#101611 58%);position:relative;overflow:hidden}.result:after{content:"";position:absolute;width:180px;height:180px;border-radius:50%;right:-75px;top:-80px;background:var(--green);filter:blur(70px);opacity:.15}.result-head{display:flex;justify-content:space-between;color:var(--muted);font-size:13px;font-weight:700}.status{padding:5px 9px;border:1px solid #43602c;border-radius:999px;color:var(--green);font-size:10px}.big-number{display:flex;align-items:baseline;gap:9px;margin:14px 0 18px}.big-number strong{font-size:clamp(60px,18vw,92px);line-height:.88;letter-spacing:-5px}.big-number span{color:var(--green);font-size:19px;font-weight:800}.formula-grid{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.formula-grid div{padding:13px 0}.formula-grid div+div{padding-left:18px;border-left:1px solid var(--line)}.formula-grid span{display:block;margin-bottom:6px;color:var(--muted);font-size:9px;letter-spacing:1.3px}.formula-grid strong{font-size:15px}.result-caption{margin:12px 0 0;color:var(--muted);font-size:11px;line-height:1.5}.copy-btn{position:relative;z-index:2;width:100%;margin-top:14px;padding:13px;border:1px solid #526f37;border-radius:12px;background:#1a2717;color:var(--green);font-weight:800}.section-block{margin-top:30px}.section-title{display:flex;align-items:end;justify-content:space-between;margin:0 3px 14px}.section-title h2{margin:0;font-size:23px}.section-title>span{color:var(--muted);font-size:11px}.load-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.load-item{padding:16px 11px;background:var(--panel);border:1px solid var(--line);border-radius:15px}.load-item.highlight{border-color:#52742d;background:#182317}.load-item span{display:block;color:var(--green);font-size:11px;font-weight:800}.load-item strong{display:block;margin-top:7px;font-size:19px}.load-item small{display:block;margin-top:5px;color:var(--muted);font-size:9px}.plate-card{padding:18px}.plate-controls{display:grid;grid-template-columns:1fr 1fr;gap:12px}.plate-result{margin-top:15px;padding-top:15px;border-top:1px solid var(--line)}.plate-result>span{color:var(--muted);font-size:11px}.plate-list{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.plate{display:grid;place-items:center;min-width:44px;height:44px;padding:0 7px;border:2px solid var(--green);border-radius:50%;color:var(--green);font-size:11px;font-weight:800}.plate-empty{color:var(--muted);font-size:13px}.actual-load{margin-top:11px;font-size:12px;color:var(--muted)}.rep-table{padding:5px 18px}.rep-row{display:grid;grid-template-columns:68px 1fr 82px;align-items:center;padding:13px 0;border-bottom:1px solid var(--line)}.rep-row:last-child{border:0}.rep-row span{color:var(--muted);font-size:12px}.rep-row strong{text-align:right;font-size:15px}.bar{height:5px;background:#252d28;border-radius:999px;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--green2),var(--green));border-radius:inherit}.safety{margin-top:26px;padding:18px 19px;border-left:3px solid var(--warn);background:#171813;border-radius:4px 14px 14px 4px}.safety strong{font-size:13px;color:var(--warn)}.safety p{margin:7px 0 0;color:#a5aaa3;font-size:12px;line-height:1.7}footer{text-align:center;margin-top:34px;color:#4f5b53;font-size:9px;letter-spacing:1.5px}@media(max-width:430px){.hero{padding-top:23px}.inputs{grid-template-columns:1fr 1fr}.plate-controls{grid-template-columns:1fr 1fr}.load-grid{grid-template-columns:repeat(2,1fr)}.big-number strong{font-size:66px}.shell{padding-left:14px;padding-right:14px}.number-field{grid-template-columns:38px 1fr 38px}.number-field input{font-size:22px}}button,input,select{font:inherit}button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+</style>
+<style>
+.goal-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin-bottom:16px}.goal-btn{min-height:58px;padding:8px 4px;border:1px solid var(--line);border-radius:12px;background:#0d120f;color:var(--muted);font-size:10px;font-weight:750}.goal-btn strong{display:block;margin-bottom:4px;color:var(--text);font-size:13px}.goal-btn.active{border-color:var(--green);background:#182317;color:var(--green)}.load-item{width:100%;text-align:left;color:var(--text);font-family:inherit;cursor:pointer}.load-item:active{transform:scale(.985)}.confidence-line{display:flex;justify-content:space-between;gap:12px;margin-top:12px;color:var(--muted);font-size:11px}.confidence-line strong{color:var(--text)}.status.warn{border-color:#755f24;color:var(--warn)}.status.low{border-color:#744037;color:#ff8c7a}.select-field.required{border-color:#755f24}.tap-hint{color:var(--muted);font-size:10px;margin-top:7px;text-align:center}.method{position:relative;z-index:2;margin-top:10px;border-top:1px solid var(--line)}.method summary{padding:12px 0 0;color:var(--muted);font-size:11px;font-weight:750;cursor:pointer;list-style:none}.method summary::-webkit-details-marker{display:none}.method summary:after{content:'＋';float:right;color:var(--green)}.method[open] summary:after{content:'−'}.method-body{margin-top:10px;padding:12px;border-radius:11px;background:#0d120f;color:var(--muted);font-size:11px;line-height:1.65}.method-body strong{color:var(--text)}.equipment{margin-top:15px;border-top:1px solid var(--line)}.equipment summary{padding:14px 0 2px;color:var(--muted);font-size:12px;font-weight:750;cursor:pointer;list-style:none}.equipment summary::-webkit-details-marker{display:none}.equipment summary:after{content:'＋';float:right;color:var(--green)}.equipment[open] summary:after{content:'−'}.plate-options{display:flex;flex-wrap:wrap;gap:8px;margin-top:11px}.plate-option{position:relative}.plate-option input{position:absolute;opacity:0;pointer-events:none}.plate-option span{display:block;padding:8px 11px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:11px;font-weight:800;cursor:pointer}.plate-option input:checked+span{border-color:#52742d;background:#182317;color:var(--green)}.warmup{margin-top:15px;padding-top:15px;border-top:1px solid var(--line)}.warmup-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.warmup-head strong{font-size:13px}.warmup-head span{color:var(--muted);font-size:10px}.warmup-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}.warmup-item{padding:11px 8px;border:1px solid var(--line);border-radius:12px;background:#0d120f}.warmup-item span{display:block;color:var(--muted);font-size:9px}.warmup-item strong{display:block;margin-top:5px;font-size:14px}.warmup-item small{display:block;margin-top:4px;color:var(--green);font-size:9px}
+@media(max-width:430px){.goal-grid{grid-template-columns:repeat(3,1fr)}.goal-btn{min-height:52px}.warmup-grid{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <div class="brand"><span class="mark">H</span><span>HERACLES LAB</span></div>
+      <div class="unit-switch" role="group" aria-label="重量单位">
+        <button type="button" class="unit active" data-unit="kg">KG</button><button type="button" class="unit" data-unit="lb">LB</button>
+      </div>
+    </header>
+
+    <section class="hero">
+      <p class="eyebrow">HERACLES STRENGTH TOOLKIT</p>
+      <h1>力量训练 <span>计算器</span></h1>
+      <p>e1RM估算 · 训练配重 · 杠铃配片</p>
+    </section>
+
+    <section class="calculator card">
+      <label class="field-label" for="exercise">训练动作</label>
+      <select class="select-field" id="exercise">
+        <option>卧推</option><option>深蹲</option><option>硬拉</option><option>实力推</option><option>杠铃划船</option><option>其他动作</option>
+      </select>
+      <div class="inputs">
+        <label>训练重量 <span id="unitLabel">KG</span>
+          <div class="number-field"><button type="button" data-step="weight" data-dir="-1" aria-label="减少重量">−</button><input id="weight" type="number" inputmode="decimal" min="0" step="2.5" value="80" /><button type="button" data-step="weight" data-dir="1" aria-label="增加重量">＋</button></div>
+        </label>
+        <label>完成次数 <span>REPS</span>
+          <div class="number-field"><button type="button" data-step="reps" data-dir="-1" aria-label="减少次数">−</button><input id="reps" type="number" inputmode="numeric" min="1" max="12" step="1" value="5" /><button type="button" data-step="reps" data-dir="1" aria-label="增加次数">＋</button></div>
+        </label>
+      </div>
+      <label class="field-label" for="rir" style="display:block;margin-top:15px">剩余次数 RIR</label>
+      <select class="select-field required" id="rir" style="margin-bottom:0">
+        <option value="" selected>请选择 RIR（必填）</option><option value="0">RIR 0｜已经力竭</option><option value="1">RIR 1｜还能做 1 次</option><option value="2">RIR 2｜还能做 2 次</option><option value="3">RIR 3｜还能做 3 次</option><option value="4">RIR 4｜还能做 4 次</option>
+      </select>
+      <div class="rep-note" id="repNote">请选择RIR；当前按RIR 0保守预览</div>
+    </section>
+
+    <section class="result card" aria-live="polite">
+      <div class="result-head"><span>估算 e1RM</span><span class="status warn" id="confidence">待确认 RIR</span></div>
+      <div class="big-number"><strong id="oneRm">90.0</strong><span id="resultUnit">kg</span></div>
+      <div class="formula-grid">
+        <div><span>EPLEY</span><strong id="epley">93.3 kg</strong></div>
+        <div><span>BRZYCKI</span><strong id="brzycki">90.0 kg</strong></div>
+      </div>
+      <div class="confidence-line"><span>两种公式估算区间</span><strong id="estimateRange">—</strong></div>
+      <p class="result-caption">推荐值取两种公式的平均，并按 0.5 <span class="inline-unit">kg</span> 取整。</p>
+      <details class="method">
+        <summary>e1RM 是如何计算的？</summary>
+        <div class="method-body"><strong>e1RM</strong> 是根据训练重量、完成次数和 RIR 推算的单次最大重量。工具分别使用 Epley 与 Brzycki 公式，再取两者平均值；RIR 会作为尚未完成的潜在次数加入估算。次数越少、越接近力竭，通常越有参考价值。</div>
+      </details>
+      <button type="button" class="copy-btn" id="copyResult">复制训练结果</button>
+    </section>
+
+    <section class="section-block">
+      <div class="section-title"><div><p>PLATE LOADER</p><h2>杠铃配片</h2></div><span>显示单侧</span></div>
+      <div class="plate-card card">
+        <div class="goal-grid" aria-label="训练目标">
+          <button type="button" class="goal-btn" data-goal="90"><strong>最大力量</strong>90%</button>
+          <button type="button" class="goal-btn" data-goal="85"><strong>力量</strong>85%</button>
+          <button type="button" class="goal-btn active" data-goal="80"><strong>力量肌肥大</strong>80%</button>
+          <button type="button" class="goal-btn" data-goal="70"><strong>肌肥大</strong>70%</button>
+          <button type="button" class="goal-btn" data-goal="55"><strong>技术恢复</strong>55%</button>
+        </div>
+        <div class="plate-controls">
+          <label class="field-label">目标重量<input class="select-field" id="targetWeight" type="number" inputmode="decimal" value="75" min="0" step="0.5" style="margin-bottom:0"></label>
+          <label class="field-label">杠铃杆 <span id="barUnitLabel" style="float:right;color:var(--muted);font-size:10px">KG</span><input class="select-field" id="barWeight" type="number" inputmode="decimal" value="20" min="0" step="0.5" style="margin-bottom:0"></label>
+        </div>
+        <div class="plate-result"><span>每侧安装</span><div class="plate-list" id="plateList"></div><div class="actual-load" id="actualLoad"></div></div>
+        <details class="equipment">
+          <summary>器材设置 · 可用杠铃片</summary>
+          <div class="plate-options" id="plateOptions"></div>
+        </details>
+        <div class="warmup">
+          <div class="warmup-head"><strong>建议热身</strong><span>基于当前工作重量</span></div>
+          <div class="warmup-grid" id="warmupGrid"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="section-title"><div><p>LOAD GUIDE</p><h2>训练配重</h2></div><span>基于推荐 e1RM</span></div>
+      <div class="load-grid" id="loadGrid"></div>
+      <div class="tap-hint">点击任意配重卡片，自动发送到杠铃配片</div>
+    </section>
+
+    <aside class="safety"><strong>训练提示</strong><p>e1RM 仅为估算。建议用 2–6 次、动作标准且接近力竭的训练组计算；不要在无人保护时盲目测试极限重量。</p></aside>
+    <footer>HERACLES DAILY · BUILT FOR BETTER TRAINING</footer>
+  </main>
+  <script>const q=s=>document.querySelector(s),qa=s=>Array.from(document.querySelectorAll(s));
+let unit='kg',oneRm=0,selectedPct=80,savedState=null;
+const exercise=q('#exercise'),weight=q('#weight'),reps=q('#reps'),rir=q('#rir'),target=q('#targetWeight'),bar=q('#barWeight');
+const roundLoad=n=>Math.round(n*2)/2,fmt=n=>Number.isFinite(n)?n.toFixed(1):'—';
+const plateSets={kg:[25,20,15,10,5,2.5,1.25,.5],lb:[45,35,25,10,5,2.5]};
+let enabledPlates={kg:[25,20,15,10,5,2.5,1.25,.5],lb:[45,35,25,10,5,2.5]};
+try{const saved=JSON.parse(localStorage.getItem('heraclesPlates')||'null');if(saved&&Array.isArray(saved.kg)&&Array.isArray(saved.lb))enabledPlates=saved}catch(e){}
+try{savedState=JSON.parse(localStorage.getItem('heraclesState')||'null')}catch(e){}
+function saveState(){try{localStorage.setItem('heraclesState',JSON.stringify({exercise:exercise.value,weight:weight.value,reps:reps.value,rir:rir.value,unit,target:target.value,bar:bar.value,selectedPct}))}catch(e){}}
+function restoreState(){
+  if(!savedState||typeof savedState!=='object')return;
+  if(['kg','lb'].includes(savedState.unit))unit=savedState.unit;
+  if(savedState.exercise)exercise.value=savedState.exercise;
+  if(savedState.weight!==undefined)weight.value=savedState.weight;
+  if(savedState.reps!==undefined)reps.value=savedState.reps;
+  if(savedState.rir!==undefined)rir.value=savedState.rir;
+  if(savedState.target!==undefined)target.value=savedState.target;
+  selectedPct=savedState.selectedPct===null?null:(Number.isFinite(Number(savedState.selectedPct))?Number(savedState.selectedPct):80);
+  qa('.unit').forEach(x=>x.classList.toggle('active',x.dataset.unit===unit));
+}
+function plateOptions(){
+  q('#barUnitLabel').textContent=unit.toUpperCase();
+  q('#plateOptions').innerHTML=plateSets[unit].map(v=>'<label class="plate-option"><input type="checkbox" value="'+v+'" '+(enabledPlates[unit].includes(v)?'checked':'')+'><span>'+v+' '+unit+'</span></label>').join('');
+}
+function renderLoads(){
+  const loads=[100,95,90,85,80,75,70,65,60,55,50],goal=Math.max(0,Number(target.value)||0);
+  const selected=goal>0&&oneRm>0?loads.reduce((best,p)=>Math.abs(oneRm*p/100-goal)<Math.abs(oneRm*best/100-goal)?p:best,loads[0]):null;
+  q('#loadGrid').innerHTML=loads.map(p=>{const active=p===selected,usage=p>=90?'力量 / 1–3 次':p>=80?'力量肌肥大 / 4–8 次':p>=65?'肌肥大 / 8–15 次':'技术与恢复';return '<button type="button" data-load="'+p+'" class="load-item '+(active?'highlight':'')+'"><span>'+p+'%</span><strong>'+fmt(roundLoad(oneRm*p/100))+' '+unit+'</strong><small>'+(active?'当前配片目标 · ':'')+usage+'</small></button>'}).join('');
+  qa('[data-goal]').forEach(b=>b.classList.toggle('active',Number(b.dataset.goal)===selectedPct));
+}
+function packWeight(goal){
+  const barValue=Number(bar.value)||0,available=enabledPlates[unit].slice().sort((a,b)=>b-a);
+  let side=Math.max(0,(goal-barValue)/2),remaining=side,used=[];
+  available.forEach(p=>{while(remaining+0.001>=p){used.push(p);remaining-=p}});
+  const actual=barValue+2*used.reduce((a,b)=>a+b,0);
+  return {used,actual,barValue};
+}
+function renderWarmup(goal){
+  const schemes=[{p:40,r:8},{p:60,r:5},{p:75,r:3},{p:90,r:1}],seen=new Set(),sets=[];
+  schemes.forEach(s=>{const packed=packWeight(goal*s.p/100),key=fmt(packed.actual);if(packed.actual<goal&&packed.actual>=packed.barValue&&!seen.has(key)){seen.add(key);sets.push({p:s.p,r:s.r,weight:packed.actual})}});
+  q('#warmupGrid').innerHTML=sets.length?sets.map((s,i)=>'<div class="warmup-item"><span>第 '+(i+1)+' 组 · '+s.p+'%</span><strong>'+fmt(s.weight)+' '+unit+'</strong><small>× '+s.r+' 次</small></div>').join(''):'<span class="plate-empty">当前重量无需额外热身组</span>';
+}
+function calcPlates(){
+  const goal=Math.max(0,Number(target.value)||0),packed=packWeight(goal),barValue=packed.barValue,used=packed.used,actual=packed.actual;
+  q('#plateList').innerHTML=used.length?used.map(p=>'<span class="plate">'+p+'</span>').join(''):'<span class="plate-empty">无需加片</span>';
+  q('#actualLoad').textContent=goal<barValue?'目标重量低于杠铃杆重量':'实际可配：'+fmt(actual)+' '+unit+(Math.abs(actual-goal)>.01?'（最接近）':'');
+  renderWarmup(actual);
+  renderLoads();
+  saveState();
+}
+function calc(){
+  const w=Math.max(0,Number(weight.value)||0),done=Math.min(12,Math.max(1,Math.round(Number(reps.value)||1))),rirChosen=rir.value!=='',reserve=rirChosen?Number(rir.value):0;
+  const effective=Math.min(16,done+reserve);reps.value=done;
+  const ep=effective===1?w:w*(1+effective/30),br=effective===1?w:w*36/(37-effective);
+  oneRm=roundLoad((ep+br)/2);
+  q('#oneRm').textContent=fmt(oneRm);q('#epley').textContent=fmt(ep)+' '+unit;q('#brzycki').textContent=fmt(br)+' '+unit;
+  q('#estimateRange').textContent=fmt(roundLoad(Math.min(ep,br)))+'–'+fmt(roundLoad(Math.max(ep,br)))+' '+unit;
+  const confidence=q('#confidence');confidence.className='status';
+  if(!rirChosen){confidence.textContent='待确认 RIR';confidence.classList.add('warn')}else if(effective<=5){confidence.textContent='可信度较高'}else if(effective<=8){confidence.textContent='可信度中等'}else if(effective<=12){confidence.textContent='误差较大';confidence.classList.add('warn')}else{confidence.textContent='不建议估算';confidence.classList.add('low')}
+  rir.classList.toggle('required',!rirChosen);
+  q('#repNote').textContent=rirChosen?'按 '+done+' 次完成＋'+reserve+' 次余力估算（约 '+effective+'RM）':'请选择RIR；当前按RIR 0保守预览';
+  q('#resultUnit').textContent=unit;qa('.inline-unit').forEach(x=>x.textContent=unit);q('#unitLabel').textContent=unit.toUpperCase();
+  if(selectedPct!==null)target.value=fmt(roundLoad(oneRm*selectedPct/100));calcPlates();
+}
+exercise.addEventListener('change',saveState);weight.addEventListener('input',calc);reps.addEventListener('input',calc);rir.addEventListener('change',calc);target.addEventListener('input',()=>{selectedPct=null;calcPlates()});bar.addEventListener('input',calcPlates);
+q('#plateOptions').addEventListener('change',()=>{const selected=qa('#plateOptions input:checked').map(x=>Number(x.value));if(!selected.length){plateOptions();return}enabledPlates[unit]=selected;try{localStorage.setItem('heraclesPlates',JSON.stringify(enabledPlates))}catch(e){}calcPlates()});
+qa('[data-step]').forEach(b=>b.addEventListener('click',()=>{const input=b.dataset.step==='weight'?weight:reps,step=b.dataset.step==='weight'?2.5:1,min=b.dataset.step==='weight'?0:1,max=b.dataset.step==='weight'?9999:12;input.value=Math.min(max,Math.max(min,(Number(input.value)||0)+Number(b.dataset.dir)*step));calc()}));
+qa('[data-goal]').forEach(b=>b.addEventListener('click',()=>{selectedPct=Number(b.dataset.goal);target.value=fmt(roundLoad(oneRm*selectedPct/100));calcPlates()}));
+q('#loadGrid').addEventListener('click',e=>{const card=e.target.closest('[data-load]');if(!card)return;selectedPct=Number(card.dataset.load);target.value=fmt(roundLoad(oneRm*selectedPct/100));calcPlates()});
+qa('.unit').forEach(b=>b.addEventListener('click',()=>{if(b.dataset.unit===unit)return;const factor=b.dataset.unit==='lb'?2.2046226218:1/2.2046226218;unit=b.dataset.unit;weight.value=roundLoad(Number(weight.value)*factor);bar.value=roundLoad(Number(bar.value)*factor);if(selectedPct===null)target.value=roundLoad(Number(target.value)*factor);qa('.unit').forEach(x=>x.classList.toggle('active',x===b));plateOptions();calc()}));
+q('#copyResult').addEventListener('click',async()=>{const action=q('#exercise').value,done=reps.value,reserve=rir.value===''?'未选择':rir.value,text=action+'：'+weight.value+unit+' × '+done+'次，RIR '+reserve+'\n估算e1RM：'+fmt(oneRm)+unit+'（'+q('#estimateRange').textContent+'）\n当前目标重量：'+target.value+unit;try{await navigator.clipboard.writeText(text);q('#copyResult').textContent='已复制 ✓'}catch(e){const t=document.createElement('textarea');t.value=text;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();q('#copyResult').textContent='已复制 ✓'}setTimeout(()=>q('#copyResult').textContent='复制训练结果',1600)});
+restoreState();plateOptions();if(savedState&&savedState.bar!==undefined)bar.value=savedState.bar;calc();
+</script>
+</body>
+</html>
